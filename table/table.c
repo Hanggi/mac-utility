@@ -107,6 +107,7 @@ void printTable(TT *tt) {
         for (i = 0; i < p->fieldNum; i++){
 
 			int size = getMaxSizeOfColumn(tt, i);
+            // printf("%d ", size);
 			char *str = strWithPadding(size, contentStr);
             printf(str, p->contentArray[i]);             // ...
 
@@ -158,9 +159,10 @@ int getMaxSizeOfColumn(TT *tt, int index) {
 
 	while(p) {
 		int j = 0;
-		while(p->content[index][j] != '\0') {
+		while(p->contentArray[index][j] != '\0') {
             j++;
         }
+        // printf("%d ", j);
 		
 		if (j > maxSize) {
 			maxSize = j;
