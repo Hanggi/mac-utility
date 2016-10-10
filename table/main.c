@@ -35,4 +35,6 @@ int main(int argc, char* argv[]) {
     // int t = atoi(argv[1]);
     // printf("%d \n", t);
     // printf("%s \n", frame[t]);
+
+    // strWithPadding(2);
 }

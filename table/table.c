@@ -1,6 +1,5 @@
 #include <stdio.h>
-// #include <string.h>
-// #include <stdarg.h>
+#include <string.h>
 #include <stdlib.h>
 #include "table.h"
 
@@ -13,8 +12,8 @@ char *gray_str_n = "\033[1;30m%s\033[0m\n";
 char *light_blue_content_str = "\033[1;36m %s \033[0m";
 char *default_content_str = "\033[m %s \033[0m";
 
-
-int getMaxSize(int len, char **con);
+int getMaxSizeOfColumn(TT *tt, int index);
+char* strWithPadding(int padding, char* color);
 
 
 TT *tableInit(int len, char **field)
@@ -28,13 +27,6 @@ TT *tableInit(int len, char **field)
 
     table->next = NULL;
 
-    // // unsigned long len = sizeof(table.row)/sizeof(char *);
-    // printf("length of array: %d \n", len);
-
-    // printf("%s \n", table->fieldRow[0]);
-
-    // int tmp = getMaxSize(len, field);
-    // printf("%d \n", tmp);
     
     return table;
 }
@@ -81,7 +73,6 @@ void printTable(TT *tt) {
     TT *p = tt;
     
     int fieldNum = p->fieldNum;
-    int rowLength = getMaxSize(fieldNum, tt->content);
 
     int totalWidth = fieldNum + rowLength;
     // printf("%d \n", totalWidth);
@@ -113,7 +104,10 @@ void printTable(TT *tt) {
 		* ****************************************************************************/
         printf(gray_str, frame[1]);                         // │ │ ... │
         for (i = 0; i < p->fieldNum; i++){
-            printf(contentStr, p->content[i]);             // ...
+
+			int size = getMaxSizeOfColumn(tt, i);
+			char *str = strWithPadding(size, contentStr);
+            printf(str, p->content[i]);             // ...
 
             if (p->fieldNum - 1 > i)
             printf(gray_str, frame[1]);                     // │ ... │ ...
@@ -139,7 +133,6 @@ void printTable(TT *tt) {
 
 			int size = getMaxSizeOfColumn(tt, i);
 
-			// printf("%d \n", size);
 			for (j = 0; j < size + 2; j++) {
 				printf(gray_str, frame[0]);                 // ─ ──────
 			}
@@ -156,22 +149,6 @@ void printTable(TT *tt) {
     }
 }
 
-int getMaxSize(int len, char **con) {
-    int size = 0;
-
-    int i;
-    for (i = 0; i < len; i++) {
-        int j = 0;
-
-        while(con[i][j] != '\0') {
-            j++;
-        }
-
-        size += j;
-    }
-
-    return size;
-}
 
 int getMaxSizeOfColumn(TT *tt, int index) {
 	TT *p = tt;
@@ -191,6 +168,23 @@ int getMaxSizeOfColumn(TT *tt, int index) {
 	}
 
 	return maxSize;
+}
+
+char* strWithPadding(int padding, char* color) {
+	char *str;
+	char tmp[64];
+	char tmp2[64];
+
+	sprintf(tmp, "%%-%ds", padding);
+	
+	// printf("%s \n", color);
+	if (color) 
+		sprintf(tmp2, color, tmp);
+
+	str = tmp2;
+
+	// printf("%s \n", tmp2);
+	return str;
 }
 
 
