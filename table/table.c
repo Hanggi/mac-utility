@@ -111,9 +111,9 @@ void printTable(TT *tt) {
     
 	char *contentStr = light_blue_content_str;
     while(p) {
-        /*
-         * Content line.
-         */
+        /* ****************************************************************************
+		* Content Line
+		* ****************************************************************************/
         printf(gray_str, frame[1]);                         // │ │ ... │
         for (i = 0; i < p->fieldNum; i++){
             printf(contentStr, p->content[i]);             // ...
@@ -124,9 +124,9 @@ void printTable(TT *tt) {
         printf(gray_str_n, frame[1]);                       // │ ... │
 		contentStr = default_content_str;
 
-        /*
-         * Last frame line of the row
-         */
+        /* ****************************************************************************
+		* Last frame boundary of row
+		* ****************************************************************************/
 		char *frameT = frame[10];
 		char *frameA = frame[9];
 		char *frameE = frame[7];
@@ -150,6 +150,8 @@ void printTable(TT *tt) {
 			printf(gray_str, frameT);                     // ┬ ──┬───
 		}
         printf(gray_str_n, frameE);
+
+		/* ****************************************************************************/
 
         //next Node
         p = p->next;
@@ -177,12 +179,14 @@ int getMaxSize(int len, char **con) {
     return size;
 }
 
-int getMaxSizeOfColumn(int index) {
-	TT *p;
+int getMaxSizeOfColumn(TT *tt, int index) {
+	TT *p = tt;
 
 	int maxSize = 0;
 
-	
+	while(p) {
+		p->content[index]
+	}
 }
 
 
