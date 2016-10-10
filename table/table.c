@@ -70,9 +70,6 @@ int tableLength(TT *tt) {
     p = tt;
 
     while(p) {
-        // printf("---%d \n", i);
-        // printf("---%d \n", p->id);
-        // printf("---%s \n", p->content[0]);
         i++;
         p=p->next;
     }
@@ -96,13 +93,13 @@ void printTable(TT *tt) {
 
     printf(gray_str, frame[2]);                         // ┌ ┌────
     for (i = 0; i < fieldNum; i++){
-        int j = 0;
-        while(p->content[i][j] != '\0') {
+        int j;
+
+		int size = getMaxSizeOfColumn(tt, i);
+		
+		for (j = 0; j < size + 2; j++) {
             printf(gray_str, frame[0]);                 // ─ ──────
-            j++;
-        }
-        printf(gray_str, frame[0]);
-        printf(gray_str, frame[0]);
+		}
 
         if (fieldNum - 1 > i)
         printf(gray_str, frame[6]);                     // ┬ ──┬───
@@ -139,12 +136,13 @@ void printTable(TT *tt) {
 		printf(gray_str, frameA);
 		for (i = 0; i < p->fieldNum; i++){
 			int j = 0;
-			while(p->content[i][j] != '\0') {
+
+			int size = getMaxSizeOfColumn(tt, i);
+
+			// printf("%d \n", size);
+			for (j = 0; j < size + 2; j++) {
 				printf(gray_str, frame[0]);                 // ─ ──────
-				j++;
 			}
-			printf(gray_str, frame[0]);
-			printf(gray_str, frame[0]);
 
 			if (p->fieldNum - 1 > i)
 			printf(gray_str, frameT);                     // ┬ ──┬───
@@ -156,10 +154,6 @@ void printTable(TT *tt) {
         //next Node
         p = p->next;
     }
-
-   
-
-
 }
 
 int getMaxSize(int len, char **con) {
@@ -185,8 +179,18 @@ int getMaxSizeOfColumn(TT *tt, int index) {
 	int maxSize = 0;
 
 	while(p) {
-		p->content[index]
+		int j = 0;
+		while(p->content[index][j] != '\0') {
+            j++;
+        }
+		// printf("j: %d \n", j);
+		if (j > maxSize) {
+			maxSize = j;
+		}
+		p = p->next;
 	}
+
+	return maxSize;
 }
 
 

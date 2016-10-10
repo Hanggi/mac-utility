@@ -20,7 +20,8 @@ int main(int argc, char* argv[]) {
     char *field2[] = {"koa.js", "1", "user", "yes"};
     tablePush(table, tmpLen, field2);
 
-    tablePush(table, tmpLen, field2);    
+    char *field3[] = {"aa.js", "23", "kernal", "noooo"};
+    tablePush(table, tmpLen, field3);    
 
     // char *dd = "%d";
     // char *vv = strcat(dd, "\n");
