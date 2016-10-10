@@ -1,12 +1,16 @@
-#include <stdio.h>
+#ifndef __TABLE_H__
+#define __TABLE_H__
+
+#include <stddef.h>
 
 struct Table {
     int id;
 
     int fieldNum;
 
-    char **fieldRow;
+    // char **fieldRow;
     char **content;
+    char contentArray[16][64];
 
     struct Table *next;
 };
@@ -42,3 +46,7 @@ int tableLength(TT *tt);
  * @return the pretty table!
  */
 void printTable(TT *tt);
+
+
+
+#endif

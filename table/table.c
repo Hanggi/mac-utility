@@ -6,12 +6,14 @@
 char *frame[] = {"─", "│", "┌", "┐", "└", "┘", "┬", "┤", "┴", "├", "┼"};
 static int init_id = 0;
 
+// color format
 char *gray_str = "\033[1;30m%s\033[0m";
 char *gray_str_n = "\033[1;30m%s\033[0m\n";
 
 char *light_blue_content_str = "\033[1;36m %s \033[0m";
 char *default_content_str = "\033[m %s \033[0m";
 
+// declaration
 int getMaxSizeOfColumn(TT *tt, int index);
 char* strWithPadding(int padding, char* color);
 
@@ -21,8 +23,12 @@ TT *tableInit(int len, char **field)
     TT *table = (TT*)malloc(sizeof(TT));
     table->id = init_id+1;
     
-    table->fieldRow = field;
     table->content = field;
+
+    int i;
+    for (i = 0; i < len; i++) {
+        strcpy(table->contentArray[i], field[i]);
+    }
     table->fieldNum = len;
 
     table->next = NULL;
@@ -41,6 +47,11 @@ void tablePush(TT *tt, int len, char **con) {
 
     cur = (TT*)malloc(sizeof(TT));
 
+    int i;
+    for (i = 0; i < len; i++) {
+        strcpy(cur->contentArray[i], con[i]);
+    }
+    
     cur->content = con;
     cur->fieldNum = len;
 
@@ -97,7 +108,7 @@ void printTable(TT *tt) {
 
 			int size = getMaxSizeOfColumn(tt, i);
 			char *str = strWithPadding(size, contentStr);
-            printf(str, p->content[i]);             // ...
+            printf(str, p->contentArray[i]);             // ...
 
             if (p->fieldNum - 1 > i)
             printf(gray_str, frame[1]);                     // │ ... │ ...
