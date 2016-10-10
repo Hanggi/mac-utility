@@ -27,7 +27,6 @@ TT *tableInit(int len, char **field)
 
     table->next = NULL;
 
-    
     return table;
 }
 
@@ -37,11 +36,6 @@ void tablePush(TT *tt, int len, char **con) {
     p = tt;
 
     while (p->next){
-
-        // printf("===%d \n", p->id);
-        // printf("===%s \n", p->content[0]);
-        // printf("%x \n", p->next);
-
         p = p->next;
     }
 
@@ -52,7 +46,6 @@ void tablePush(TT *tt, int len, char **con) {
 
     cur->next = NULL;
     p->next = cur;
-
 }
 
 int tableLength(TT *tt) {
@@ -73,9 +66,6 @@ void printTable(TT *tt) {
     TT *p = tt;
     
     int fieldNum = p->fieldNum;
-
-    int totalWidth = fieldNum + rowLength;
-    // printf("%d \n", totalWidth);
 
     /* ****************************************************************************
 	 * Fist frame boundary of row
@@ -160,7 +150,7 @@ int getMaxSizeOfColumn(TT *tt, int index) {
 		while(p->content[index][j] != '\0') {
             j++;
         }
-		// printf("j: %d \n", j);
+		
 		if (j > maxSize) {
 			maxSize = j;
 		}
@@ -177,13 +167,11 @@ char* strWithPadding(int padding, char* color) {
 
 	sprintf(tmp, "%%-%ds", padding);
 	
-	// printf("%s \n", color);
 	if (color) 
 		sprintf(tmp2, color, tmp);
 
 	str = tmp2;
 
-	// printf("%s \n", tmp2);
 	return str;
 }
 
