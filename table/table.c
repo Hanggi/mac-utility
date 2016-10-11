@@ -5,21 +5,27 @@
 
 char *frame[] = {"─", "│", "┌", "┐", "└", "┘", "┬", "┤", "┴", "├", "┼"};
 static int init_id = 0;
+int idColor = 0;
 
 // color format
 char *gray_str = "\033[1;30m%s\033[0m";
 char *gray_str_n = "\033[1;30m%s\033[0m\n";
 
-char *light_blue_content_str = "\033[1;36m %s \033[0m";
-char *default_content_str = "\033[m %s \033[0m";
+char *light_blue_content_str    = "\033[1;36m %s \033[0m";
+char *default_content_str       = "\033[m %s \033[0m";
+char *yellow_content_str        = "\033[1;33m %s \033[0m";
 
 // declaration
 int getMaxSizeOfColumn(TT *tt, int index);
 char* strWithPadding(int padding, char* color);
 
 
-TT *tableInit(int len, char **field)
+TT *tableInit(int len, char **field, int id)
 {
+    if (id) {
+        idColor = 1;
+    }
+    
     TT *table = (TT*)malloc(sizeof(TT));
     table->id = init_id+1;
     
@@ -108,7 +114,12 @@ void printTable(TT *tt) {
 
 			int size = getMaxSizeOfColumn(tt, i);
             // printf("%d ", size);
-			char *str = strWithPadding(size, contentStr);
+			char *str;
+            if (i == 0 && idColor) {
+                str = strWithPadding(size, yellow_content_str);
+            }else {
+                str = strWithPadding(size, contentStr);
+            }
             printf(str, p->contentArray[i]);             // ...
 
             if (p->fieldNum - 1 > i)

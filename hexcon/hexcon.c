@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <math.h>
 #include "hexcon.h"
 
 char* dealDecimal(char* digit, int divider);
@@ -47,6 +48,38 @@ char* dtob(char* digit) {
     char* res = dealDecimal(digit, 2);
 
     return res;
+}
+
+int htod(char* digit) {
+    int arr[16];
+
+    int ll = 0;
+    while(digit[ll] != '\0') {
+        ll++;
+    }
+
+    int i;
+    for (i = 0; i < ll; i++) {
+        if(digit[i] >= 'a' && digit[i] <= 'z') {
+            digit[i] = 'A' + (digit[i] - 'a');
+        }
+
+        int j;
+        for (j = 0; j < 16; j ++) {
+            if (digit[i] == hex[j]) {
+                arr[i] = j;
+            } 
+        }
+    }
+
+    int sum = 0;
+
+    int k = 0;
+    for (k = 0; k < ll; k++) {
+        sum += arr[k] * pow(16, ll - k - 1);
+    }
+    
+    return sum;
 }
 
 char* dealDecimal(char* digit, int divider) {

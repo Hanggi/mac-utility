@@ -24,7 +24,7 @@ typedef struct Table TT;
  * @return
  *      Table &tt;
  */
-TT *tableInit(int len, char **field);
+TT *tableInit(int len, char **field, int id);
 
 /*
  * @paramaters

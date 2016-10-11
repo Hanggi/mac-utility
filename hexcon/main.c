@@ -8,16 +8,31 @@ int INDEX = 0;
 
 int main(int argc, char* argv[]) {
 
-    // if (argc == 2) {
-        char *field[] = {"id", "Decimal", "hexa", "Octal", "Binary", "!"};
-        int fieldLen = sizeof(field)/sizeof(char *);
+    char *field[] = {"id", "Decimal", "hexa", "Octal", "Binary", "!!"};
+    int fieldLen = sizeof(field)/sizeof(char *);
 
-        TT *table = tableInit(fieldLen, field);
+    TT *table = tableInit(fieldLen, field, 1);
+
+    int arg = strcmp(argv[1], "-x");
+    if (arg == 0) {
+        printf("\033[0;32;34m[Hexa]\033[0m\033[1;34m Now, Input number in hexadecimal mode. \033[0m \n");
         
-        int i;
-        for (i = 1; i < argc; i ++) {
-            // char *field[] = {"NaN", "NaN", "NaN", "NaN"};
+        int argI;
+        for (argI = 2; argI < argc; argI++) {
+            sprintf(argv[argI], "%d", htod(argv[argI]));
+        }
+    } else {
+        printf("\033[0;33m[Decimal]\033[0m\033[1;33m Now, Input number in hexadecimal mode. \033[0m \n");
 
+    }
+
+        int i = 1;
+        if (arg == 0) {
+            i++;
+        }
+        for (; i < argc; i++) {
+            // char *field[] = {"NaN", "NaN", "NaN", "NaN"};
+            
             char *tmpStr;
             sprintf(tmpStr, "%d", ++INDEX);
             field[0] = tmpStr;
@@ -32,22 +47,16 @@ int main(int argc, char* argv[]) {
 
             char *p4 = dtob(argv[i]);
             field[4] = p4;
+
             tablePush(table, fieldLen, field);
             
         // printf("========== \n");
             free(p2);
             free(p3);
             free(p4);
-            // free(fieldT);
-
         }
-
         
         printTable(table);
-
-    // }
-
-   
 
     return 0;
 }

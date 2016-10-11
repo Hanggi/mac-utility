@@ -27,7 +27,11 @@ char* dtoo(char* digit);
  * @return
  *      char *str; // 1010010110
  */
-char* dtob(char* digit); 
+char* dtob(char* digit);
+
+
+int htod(char* digit);
+
 
 
 #endif
