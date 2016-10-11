@@ -8,7 +8,7 @@ int INDEX = 0;
 
 int main(int argc, char* argv[]) {
 
-    char *field[] = {"id", "Decimal", "hexa", "Octal", "Binary", "!!"};
+    char *field[] = {"id", "Decimal", "hexa", "Octal", "Binary", "!"};
     int fieldLen = sizeof(field)/sizeof(char *);
 
     TT *table = tableInit(fieldLen, field, 1);
@@ -22,7 +22,7 @@ int main(int argc, char* argv[]) {
             sprintf(argv[argI], "%d", htod(argv[argI]));
         }
     } else {
-        printf("\033[0;33m[Decimal]\033[0m\033[1;33m Now, Input number in hexadecimal mode. \033[0m \n");
+        printf("\033[0;33m[Decimal]\033[0m\033[1;33m Now, Input number in Decimal mode. \033[0m \n");
 
     }
 
@@ -31,9 +31,7 @@ int main(int argc, char* argv[]) {
             i++;
         }
         for (; i < argc; i++) {
-            // char *field[] = {"NaN", "NaN", "NaN", "NaN"};
-            
-            char *tmpStr;
+            char tmpStr[16];
             sprintf(tmpStr, "%d", ++INDEX);
             field[0] = tmpStr;
 
