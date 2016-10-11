@@ -11,7 +11,6 @@ int main(int argc, char* argv[]) {
     // if (argc == 2) {
         char *field[] = {"id", "Decimal", "hexa", "Octal", "Binary", "!"};
         int fieldLen = sizeof(field)/sizeof(char *);
-        printf("%d \n", fieldLen);
 
         TT *table = tableInit(fieldLen, field);
         
