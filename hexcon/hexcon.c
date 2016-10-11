@@ -20,6 +20,7 @@ char* dtoh(char* digit) {
     }
     res[0] = '0';
     res[1] = 'x';
+    res[ll+2] = '\0';
 
     return res;
 }
@@ -37,6 +38,7 @@ char* dtoo(char* digit) {
         res[i+1] = res[i];
     }
     res[0] = '0';
+    res[ll+1] = '\0';
 
     return res;
 }
