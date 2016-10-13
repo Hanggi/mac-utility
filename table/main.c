@@ -10,12 +10,12 @@ int main(int argc, char* argv[]) {
     int tmpLen = sizeof(field)/sizeof(char *);
 
     TT *table = tableInit(tmpLen, field);
-    
+
     char *field2[] = {"koa.js", "1", "user", "yes"};
     tablePush(table, tmpLen, field2);
 
     char *field3[] = {"aa.js", "23", "kernal", "noooo"};
-    tablePush(table, tmpLen, field3);    
+    tablePush(table, tmpLen, field3);
 
     printTable(table);
 }
