@@ -1,6 +1,8 @@
 # Memory Detector
 
-This is my Memory Detector to check out memory leak and free freed memory. To see a good 
+This is my Memory Detector to check out memory leak and free freed memory.
+
+To see a better typesetting, can use markdown.
 
 
 ### How to use
@@ -33,4 +35,16 @@ $ make free
 $ make pass
 ```
 
-The library may detect the malloc and free function, and report the results of detecting
+The library may detect the malloc and free function, and report the results of detecting.
+
+If there is a double free, you can see like:
+
+> [ILLEGAL]This is a DOUBLE free! @: 0x90a060
+
+And if there is a memory leak:
+
+> [LEAK] No.2 Memory @ 0x12c306 didn't freed for size of 100!
+
+Every thing passed:
+
+> [PASS] Every memory managed well.
