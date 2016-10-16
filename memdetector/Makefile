@@ -2,7 +2,7 @@ lib:
 	gcc -fPIC -g -c mc.c -o memdetector.o
 	gcc -fPIC -g -c memlist.c -o memlist.o
 so:
-	gcc -fPIC -g -c mc.c -o libs.o
+	gcc -fPIC -g -c mc.c -o memdetector.o
 	gcc -fPIC -g -c memlist.c -o memlist.o
 	gcc -g -shared -Wl,-soname,libs.so -o libs.so memlist.o memdetector.o -lc
 
@@ -25,7 +25,7 @@ pass:
 	LD_PRELOAD=./libs.so ./test_pass
 
 clean:
-	rm libs.o libs.so memlist.o test test_pass test_leak test_free
+	rm libs.so memlist.o test test_pass test_leak test_free memdetector.o
 
 cleanexe:
 	rm test test_pass test_leak test_free

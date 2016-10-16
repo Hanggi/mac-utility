@@ -35,6 +35,9 @@ $ make free
 $ make pass
 ```
 
+You can check the sorce file of test_free.c, test_leak.c, test_pass.c file.
+
+
 The library may detect the malloc and free function, and report the results of detecting.
 
 If there is a double free, you can see like:
